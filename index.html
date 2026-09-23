@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Fiesta de Rosas & Clavel — Registro JAS</title>
+<title>Fiesta de Rosas & Clavel — Registro de Asistencia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -206,6 +206,7 @@
         </ul>
       </div>
 
+      <!-- FORMULARIO - Enlace correcto -->
       <form id="registroForm" action="https://formspree.io/f/xzegzgjy" method="POST">
         <input type="hidden" name="_subject" value="Nuevo registro - Rosas & Clavel">
         <input type="hidden" name="_gotcha">
@@ -292,7 +293,7 @@ const mensajeExito = document.getElementById('mensajeExito');
 const form = document.getElementById('registroForm');
 const btnEnviar = document.getElementById('btnEnviar');
 
-form.addEventListener('submit', function(e) {
+form.addEventListener('submit', async function(e) {
   e.preventDefault();
   
   // Validaciones
@@ -301,11 +302,11 @@ form.addEventListener('submit', function(e) {
   const rama = document.getElementById('rama').value;
   
   const okNombres = nombres.length > 3;
-  const okContacto = /^[0-9+()\s-]{6,15}$/.test(contacto);
+  const okContacto = /^[0-9+\s-]{6,15}$/.test(contacto);
   const okRama = rama !== "";
 
   document.getElementById('hint-nombres').textContent = okNombres ? "" : "Escribe tu nombre completo.";
-  document.getElementById('hint-contacto').textContent = okContacto ? "" : "Ingresa un número de contacto válido.";
+  document.getElementById('hint-contacto').textContent = okContacto ? "" : "Ingresa un número válido.";
   document.getElementById('hint-rama').textContent = okRama ? "" : "Selecciona tu rama.";
 
   if (!okNombres || !okContacto || !okRama) return;
@@ -313,26 +314,23 @@ form.addEventListener('submit', function(e) {
   btnEnviar.disabled = true;
   btnEnviar.textContent = "Enviando...";
 
-  fetch(form.action, {
-    method: 'POST',
-    body: new FormData(form),
-    headers: { 'Accept': 'application/json' }
-  })
-  .then(res => {
-    if (res.ok) {
+  try {
+    const respuesta = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (respuesta.ok) {
       formulario.classList.add('oculto');
       mensajeExito.classList.add('visible');
     } else {
-      alert('Hubo un problema. Inténtalo de nuevo.');
-      btnEnviar.disabled = false;
-      btnEnviar.textContent = "Enviar mi confirmación";
+      // Si falla el método sin recargar → envía de forma normal
+      form.submit();
     }
-  })
-  .catch(() => {
-    alert('Error de conexión. Inténtalo de nuevo.');
-    btnEnviar.disabled = false;
-    btnEnviar.textContent = "Enviar mi confirmación";
-  });
+  } catch (error) {
+    form.submit();
+  }
 });
 </script>
 </body>
