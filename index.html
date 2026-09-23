@@ -208,6 +208,7 @@
 
       <form id="registroForm" action="https://formspree.io/f/xzegzgjy" method="POST">
         <input type="hidden" name="_subject" value="Nuevo registro - Rosas & Clavel">
+        <input type="hidden" name="_gotcha">
         
         <div class="field">
           <label for="nombres">Nombres y apellidos</label>
@@ -291,7 +292,9 @@ const mensajeExito = document.getElementById('mensajeExito');
 const form = document.getElementById('registroForm');
 const btnEnviar = document.getElementById('btnEnviar');
 
-form.addEventListener('submit', async function(e) {
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  
   // Validaciones
   const nombres = document.getElementById('nombres').value.trim();
   const contacto = document.getElementById('contacto').value.trim();
@@ -305,25 +308,18 @@ form.addEventListener('submit', async function(e) {
   document.getElementById('hint-contacto').textContent = okContacto ? "" : "Ingresa un número de contacto válido.";
   document.getElementById('hint-rama').textContent = okRama ? "" : "Selecciona tu rama.";
 
-  if (!okNombres || !okContacto || !okRama) {
-    e.preventDefault();
-    return;
-  }
+  if (!okNombres || !okContacto || !okRama) return;
 
-  // Enviar y mostrar mensaje
-  e.preventDefault();
   btnEnviar.disabled = true;
   btnEnviar.textContent = "Enviando...";
 
-  try {
-    const respuesta = await fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    });
-
-    if (respuesta.ok) {
-      // Ocultar formulario y mostrar mensaje verde
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(res => {
+    if (res.ok) {
       formulario.classList.add('oculto');
       mensajeExito.classList.add('visible');
     } else {
@@ -331,11 +327,12 @@ form.addEventListener('submit', async function(e) {
       btnEnviar.disabled = false;
       btnEnviar.textContent = "Enviar mi confirmación";
     }
-  } catch (error) {
+  })
+  .catch(() => {
     alert('Error de conexión. Inténtalo de nuevo.');
     btnEnviar.disabled = false;
     btnEnviar.textContent = "Enviar mi confirmación";
-  }
+  });
 });
 </script>
 </body>
