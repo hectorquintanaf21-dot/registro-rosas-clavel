@@ -22,24 +22,6 @@
     --radius:14px;
     box-sizing:border-box;
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --ivory:#1E1517;
-      --ink:#F3E9E6;
-      --ink-soft:#C9B7B2;
-      --blush-soft:#3A2126;
-      --wine:#D98CA0;
-      --wine-deep:#F3DEE0;
-    }
-  }
-  :root[data-theme="dark"]{
-    --ivory:#1E1517;
-    --ink:#F3E9E6;
-    --ink-soft:#C9B7B2;
-    --blush-soft:#3A2126;
-    --wine:#D98CA0;
-    --wine-deep:#F3DEE0;
-  }
   *{box-sizing:border-box;}
   html{scroll-padding-top:env(safe-area-inset-top,0px);}
   body{
@@ -56,12 +38,8 @@
     padding-left:16px;
     padding-right:16px;
     line-height:1.5;
-    -webkit-font-smoothing:antialiased;
   }
-  .wrap{
-    max-width:560px;
-    margin:0 auto;
-  }
+  .wrap{max-width:560px;margin:0 auto;}
   .card{
     background:var(--ivory);
     border:1px solid var(--blush-soft);
@@ -69,18 +47,9 @@
     padding:40px 30px;
     box-shadow:0 20px 60px -30px rgba(74,22,38,0.35);
   }
-  .hero{
-    text-align:center;
-    margin-bottom:30px;
-  }
+  .hero{text-align:center;margin-bottom:30px;}
   .hero svg{width:64px;height:64px;margin-bottom:6px;}
-  .kicker{
-    font-size:13px;
-    letter-spacing:0.04em;
-    color:var(--gold);
-    font-weight:600;
-    margin:0 0 6px;
-  }
+  .kicker{font-size:13px;letter-spacing:0.04em;color:var(--gold);font-weight:600;margin:0 0 6px;}
   h1{
     font-family:'Cormorant Garamond', Georgia, serif;
     font-weight:700;
@@ -89,11 +58,7 @@
     margin:0 0 10px;
     line-height:1.1;
   }
-  .subtitle{
-    font-size:15px;
-    color:var(--ink-soft);
-    margin:0;
-  }
+  .subtitle{font-size:15px;color:var(--ink-soft);margin:0;}
   .invite{
     font-family:'Cormorant Garamond', Georgia, serif;
     font-size:19px;
@@ -105,7 +70,7 @@
   .rules{
     background:var(--blush-soft);
     border-radius:var(--radius);
-    padding:22px 22px 22px 20px;
+    padding:22px;
     margin-bottom:32px;
   }
   .rules h2{
@@ -115,11 +80,7 @@
     margin:0 0 14px;
     font-weight:600;
   }
-  .rules ul{
-    margin:0;
-    padding:0;
-    list-style:none;
-  }
+  .rules ul{margin:0;padding:0;list-style:none;}
   .rules li{
     position:relative;
     padding-left:26px;
@@ -131,265 +92,193 @@
   .rules li::before{
     content:"";
     position:absolute;
-    left:0;
-    top:5px;
-    width:14px;
-    height:14px;
+    left:0;top:5px;
+    width:14px;height:14px;
     border-radius:50%;
     border:2px solid var(--wine);
   }
   .rules li::after{
     content:"";
     position:absolute;
-    left:4.5px;
-    top:9.5px;
-    width:5px;
-    height:5px;
+    left:4.5px;top:9.5px;
+    width:5px;height:5px;
     border-radius:50%;
     background:var(--wine);
   }
   form{display:flex;flex-direction:column;gap:20px;}
   .field{display:flex;flex-direction:column;gap:6px;}
-  label{
-    font-size:13px;
-    font-weight:600;
-    color:var(--wine-deep);
-    letter-spacing:0.01em;
-  }
-  input[type="text"], input[type="tel"], input[type="email"], select{
-    font-family:inherit;
-    font-size:16px;
-    padding:13px 14px;
-    border-radius:10px;
-    border:1.5px solid var(--blush-soft);
-    background:var(--ivory);
-    color:var(--ink);
-    outline:none;
-    transition:border-color .15s ease, box-shadow .15s ease;
-    width:100%;
-    appearance:none;
+  label{font-size:13px;font-weight:600;color:var(--wine-deep);letter-spacing:0.01em;}
+  input[type="text"], input[type="tel"], select{
+    font-family:inherit;font-size:16px;padding:13px 14px;
+    border-radius:10px;border:1.5px solid var(--blush-soft);
+    background:var(--ivory);color:var(--ink);outline:none;
+    transition:border-color .15s ease;
+    width:100%;appearance:none;
   }
   select{
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236E2338' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;
-    background-position:right 14px center;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236E2338' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;
     padding-right:36px;
   }
-  input:focus, select:focus{
-    border-color:var(--wine);
-    box-shadow:0 0 0 3px rgba(110,35,56,0.14);
-  }
-  input:focus-visible, select:focus-visible, button:focus-visible{
-    outline:2.5px solid var(--gold);
-    outline-offset:2px;
-  }
+  input:focus, select:focus{border-color:var(--wine);box-shadow:0 0 0 3px rgba(110,35,56,0.14);}
   .hint{font-size:12.5px;color:var(--error);min-height:14px;}
   .radio-group{display:flex;gap:10px;flex-wrap:wrap;}
-  .radio-card{
-    flex:1 1 140px;
-    position:relative;
-  }
-  .radio-card input{
-    position:absolute;
-    opacity:0;
-    inset:0;
-    margin:0;
-    cursor:pointer;
-  }
+  .radio-card{flex:1 1 140px;position:relative;}
+  .radio-card input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer;}
   .radio-card span{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:6px;
-    padding:12px 10px;
-    border-radius:10px;
-    border:1.5px solid var(--blush-soft);
-    font-size:14px;
-    font-weight:500;
-    text-align:center;
-    color:var(--ink);
-    transition:border-color .15s ease, background .15s ease;
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    padding:12px 10px;border-radius:10px;border:1.5px solid var(--blush-soft);
+    font-size:14px;font-weight:500;text-align:center;color:var(--ink);
+    transition:all .15s ease;
   }
   .radio-card input:checked + span{
-    border-color:var(--wine);
-    background:var(--blush-soft);
-    color:var(--wine-deep);
-    font-weight:600;
-  }
-  .radio-card input:focus-visible + span{
-    outline:2.5px solid var(--gold);
-    outline-offset:2px;
+    border-color:var(--wine);background:var(--blush-soft);color:var(--wine-deep);font-weight:600;
   }
   .consent{
-    display:flex;
-    align-items:flex-start;
-    gap:10px;
-    background:var(--blush-soft);
-    border-radius:10px;
-    padding:14px 16px;
-    font-size:13.5px;
-    color:var(--ink);
+    display:flex;align-items:flex-start;gap:10px;
+    background:var(--blush-soft);border-radius:10px;padding:14px 16px;
+    font-size:13.5px;color:var(--ink);
   }
   .consent input{width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:var(--wine);}
   button[type="submit"]{
-    font-family:inherit;
-    font-size:16px;
-    font-weight:600;
-    letter-spacing:0.01em;
-    color:var(--ivory);
-    background:var(--wine);
-    border:none;
-    border-radius:12px;
-    padding:15px;
-    cursor:pointer;
-    transition:background .15s ease, transform .1s ease;
+    font-family:inherit;font-size:16px;font-weight:600;letter-spacing:0.01em;
+    color:var(--ivory);background:var(--wine);border:none;
+    border-radius:12px;padding:15px;cursor:pointer;
+    transition:background .15s ease;
   }
   button[type="submit"]:hover{background:var(--wine-deep);}
-  button[type="submit"]:active{transform:scale(0.99);}
   button[type="submit"]:disabled{opacity:0.6;cursor:not-allowed;}
-  .footer-note{
-    text-align:center;
-    font-size:12px;
-    color:var(--ink-soft);
-    margin-top:28px;
+  .footer-note{text-align:center;font-size:12px;color:var(--ink-soft);margin-top:28px;}
+  
+  /* Mensaje de éxito */
+  #mensajeExito{display:none;text-align:center;padding:40px 20px;}
+  #mensajeExito.visible{display:block;animation:aparecer 0.5s ease;}
+  @keyframes aparecer{
+    from{opacity:0;transform:translateY(10px);}
+    to{opacity:1;transform:translateY(0);}
   }
-  .success{
-    display:none;
-    text-align:center;
-    padding:30px 20px;
-  }
-  .success.visible{
-    display:block;
-  }
-  .success svg{width:56px;height:56px;margin-bottom:14px;}
-  .success h2{
+  #mensajeExito svg{width:60px;height:60px;margin-bottom:16px;}
+  #mensajeExito h2{
     font-family:'Cormorant Garamond', Georgia, serif;
     color:var(--ok);
-    font-size:26px;
-    margin:0 0 10px;
+    font-size:28px;
+    margin:0 0 12px;
   }
-  .success p{color:var(--ink-soft);font-size:14.5px;margin:0;}
-  form.hidden{display:none;}
+  #formulario.oculto{display:none;}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="card">
-    <div class="hero">
-      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="32" cy="32" r="6" fill="var(--gold)"/>
-        <g fill="var(--wine)" opacity="0.9">
-          <ellipse cx="32" cy="16" rx="9" ry="13"/>
-          <ellipse cx="32" cy="48" rx="9" ry="13"/>
-          <ellipse cx="16" cy="32" rx="13" ry="9"/>
-          <ellipse cx="48" cy="32" rx="13" ry="9"/>
-        </g>
-        <g fill="var(--blush)" opacity="0.85">
-          <ellipse cx="21" cy="21" rx="8" ry="11" transform="rotate(-45 21 21)"/>
-          <ellipse cx="43" cy="21" rx="8" ry="11" transform="rotate(45 43 21)"/>
-          <ellipse cx="21" cy="43" rx="8" ry="11" transform="rotate(45 21 43)"/>
-          <ellipse cx="43" cy="43" rx="8" ry="11" transform="rotate(-45 43 43)"/>
-        </g>
-      </svg>
-      <p class="kicker">JAS Distrito Abancay</p>
-      <h1>Rosas &amp; Clavel</h1>
-      <p class="subtitle">Registro de asistencia</p>
-    </div>
-    <p class="invite">Completa tus datos y confirma tu asistencia a esta noche de gala.</p>
-    <div class="rules">
-      <h2>Normas a cumplir</h2>
-      <ul>
-        <li>Llegar puntualmente a la hora indicada (sugerido)</li>
-        <li>Tratar con respeto y amabilidad a todos</li>
-        <li>Mantener buen comportamiento en todo momento</li>
-        <li>Seguir las indicaciones de los organizadores</li>
-        <li>Cuidar la limpieza y el lugar del evento</li>
-        <li>Código de vestimenta: gala / etiqueta formal</li>
-        <li>El ingreso está sujeto al cumplimiento del código de vestimenta</li>
-        <li>Entrevista con tu presidente de rama</li>
-      </ul>
+    <div id="formulario">
+      <div class="hero">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="32" cy="32" r="6" fill="var(--gold)"/>
+          <g fill="var(--wine)" opacity="0.9">
+            <ellipse cx="32" cy="16" rx="9" ry="13"/>
+            <ellipse cx="32" cy="48" rx="9" ry="13"/>
+            <ellipse cx="16" cy="32" rx="13" ry="9"/>
+            <ellipse cx="48" cy="32" rx="13" ry="9"/>
+          </g>
+          <g fill="var(--blush)" opacity="0.85">
+            <ellipse cx="21" cy="21" rx="8" ry="11" transform="rotate(-45 21 21)"/>
+            <ellipse cx="43" cy="21" rx="8" ry="11" transform="rotate(45 43 21)"/>
+            <ellipse cx="21" cy="43" rx="8" ry="11" transform="rotate(45 21 43)"/>
+            <ellipse cx="43" cy="43" rx="8" ry="11" transform="rotate(-45 43 43)"/>
+          </g>
+        </svg>
+        <p class="kicker">JAS Distrito Abancay</p>
+        <h1>Rosas &amp; Clavel</h1>
+        <p class="subtitle">Registro de asistencia</p>
+      </div>
+      <p class="invite">Completa tus datos y confirma tu asistencia a esta noche de gala.</p>
+      <div class="rules">
+        <h2>Normas a cumplir</h2>
+        <ul>
+          <li>Llegar puntualmente a la hora indicada (sugerido)</li>
+          <li>Tratar con respeto y amabilidad a todos</li>
+          <li>Mantener buen comportamiento en todo momento</li>
+          <li>Seguir las indicaciones de los organizadores</li>
+          <li>Cuidar la limpieza y el lugar del evento</li>
+          <li>Código de vestimenta: gala / etiqueta formal</li>
+          <li>El ingreso está sujeto al cumplimiento del código de vestimenta</li>
+          <li>Entrevista con tu presidente de rama</li>
+        </ul>
+      </div>
+
+      <form id="registroForm" action="https://formspree.io/f/xzegzgjy" method="POST">
+        <input type="hidden" name="_subject" value="Nuevo registro - Rosas & Clavel">
+        
+        <div class="field">
+          <label for="nombres">Nombres y apellidos</label>
+          <input type="text" id="nombres" name="nombres" autocomplete="name" required placeholder="Ingresa tus datos">
+          <span class="hint" id="hint-nombres"></span>
+        </div>
+        
+        <div class="field">
+          <label for="contacto">Número de contacto</label>
+          <input type="tel" id="contacto" name="contacto" autocomplete="tel" required placeholder="Ingresa tus datos">
+          <span class="hint" id="hint-contacto"></span>
+        </div>
+        
+        <div class="field">
+          <label for="rama">Rama</label>
+          <select id="rama" name="rama" required>
+            <option value="" disabled selected>Selecciona tu rama</option>
+            <option>Abancay</option>
+            <option>Tamburco</option>
+            <option>Patibamba</option>
+            <option>Intimpas</option>
+            <option>Investigador</option>
+          </select>
+          <span class="hint" id="hint-rama"></span>
+        </div>
+        
+        <div class="field">
+          <label>¿Eres miembro SUD?</label>
+          <div class="radio-group">
+            <label class="radio-card">
+              <input type="radio" name="miembro" value="Sí, soy miembro" required>
+              <span>Sí, soy miembro</span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="miembro" value="No soy miembro">
+              <span>No soy miembro</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label>¿Asistirás al evento?</label>
+          <div class="radio-group">
+            <label class="radio-card">
+              <input type="radio" name="asistencia" value="Sí, asistiré" required>
+              <span>Sí, asistiré</span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="asistencia" value="No podré asistir">
+              <span>No podré asistir</span>
+            </label>
+          </div>
+        </div>
+        
+        <label class="consent">
+          <input type="checkbox" id="acepto" name="acepto" value="Sí" required>
+          <span>He leído y me comprometo a cumplir las normas establecidas para la actividad.</span>
+        </label>
+        
+        <button type="submit" id="btnEnviar">Enviar mi confirmación</button>
+      </form>
     </div>
 
-    <!-- ✅ Formulario con tu enlace -->
-    <form id="registroForm" action="https://formspree.io/f/xzegzgjy" method="POST">
-      <input type="hidden" name="_subject" value="Nuevo registro - Rosas & Clavel">
-      <input type="hidden" name="_replyto">
-      
-      <div class="field">
-        <label for="nombres">Nombres y apellidos</label>
-        <input type="text" id="nombres" name="nombres" autocomplete="name" required placeholder="Ingresa tus datos">
-        <span class="hint" id="hint-nombres"></span>
-      </div>
-      
-      <div class="field">
-        <label for="email">Tu correo electrónico</label>
-        <input type="email" id="email" name="_replyto" autocomplete="email" required placeholder="tu@correo.com">
-        <span class="hint" id="hint-email"></span>
-      </div>
-      
-      <div class="field">
-        <label for="contacto">Número de contacto</label>
-        <input type="tel" id="contacto" name="contacto" autocomplete="tel" required placeholder="Ingresa tus datos">
-        <span class="hint" id="hint-contacto"></span>
-      </div>
-      
-      <div class="field">
-        <label for="rama">Rama</label>
-        <select id="rama" name="rama" required>
-          <option value="" disabled selected>Selecciona tu rama</option>
-          <option>Abancay</option>
-          <option>Tamburco</option>
-          <option>Patibamba</option>
-          <option>Intimpas</option>
-          <option>Investigador</option>
-        </select>
-        <span class="hint" id="hint-rama"></span>
-      </div>
-      
-      <div class="field">
-        <label>¿Eres miembro SUD?</label>
-        <div class="radio-group">
-          <label class="radio-card">
-            <input type="radio" name="miembro" value="Sí, soy miembro" required>
-            <span>Sí, soy miembro</span>
-          </label>
-          <label class="radio-card">
-            <input type="radio" name="miembro" value="No soy miembro">
-            <span>No soy miembro</span>
-          </label>
-        </div>
-      </div>
-      
-      <div class="field">
-        <label>¿Asistirás al evento?</label>
-        <div class="radio-group">
-          <label class="radio-card">
-            <input type="radio" name="asistencia" value="Sí, asistiré" required>
-            <span>Sí, asistiré</span>
-          </label>
-          <label class="radio-card">
-            <input type="radio" name="asistencia" value="No podré asistir">
-            <span>No podré asistir</span>
-          </label>
-        </div>
-      </div>
-      
-      <label class="consent">
-        <input type="checkbox" id="acepto" name="acepto" value="Sí" required>
-        <span>He leído y me comprometo a cumplir las normas establecidas para la actividad.</span>
-      </label>
-      
-      <button type="submit" id="btnEnviar">Enviar mi confirmación</button>
-    </form>
-
-    <!-- ✅ Mensaje de confirmación que APARECE -->
-    <div class="success" id="mensajeExito">
-      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="28" cy="28" r="27" stroke="var(--ok)" stroke-width="2"/>
-        <path d="M17 29l7 7 15-15" stroke="var(--ok)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Mensaje de éxito -->
+    <div id="mensajeExito">
+      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="28" cy="28" r="27" stroke="#3E6B4F" stroke-width="2"/>
+        <path d="M17 29l7 7 15-15" stroke="#3E6B4F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <h2>¡Registro exitoso! ✅</h2>
-      <p>Gracias por confirmar tu asistencia 💐<br>Te llegará un mensaje de confirmación a tu correo.</p>
+      <h2>✅ ¡Registro Exitoso!</h2>
+      <p>Gracias por confirmar tu asistencia 💐</p>
     </div>
     
     <p class="footer-note">JAS Distrito Abancay</p>
@@ -397,28 +286,26 @@
 </div>
 
 <script>
-const form = document.getElementById('registroForm');
+const formulario = document.getElementById('formulario');
 const mensajeExito = document.getElementById('mensajeExito');
+const form = document.getElementById('registroForm');
 const btnEnviar = document.getElementById('btnEnviar');
 
 form.addEventListener('submit', async function(e) {
-  // Validación
+  // Validaciones
   const nombres = document.getElementById('nombres').value.trim();
-  const email = document.getElementById('email').value.trim();
   const contacto = document.getElementById('contacto').value.trim();
   const rama = document.getElementById('rama').value;
   
   const okNombres = nombres.length > 3;
-  const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const okContacto = /^[0-9+()\s-]{6,15}$/.test(contacto);
   const okRama = rama !== "";
 
   document.getElementById('hint-nombres').textContent = okNombres ? "" : "Escribe tu nombre completo.";
-  document.getElementById('hint-email').textContent = okEmail ? "" : "Escribe un correo válido.";
   document.getElementById('hint-contacto').textContent = okContacto ? "" : "Ingresa un número de contacto válido.";
   document.getElementById('hint-rama').textContent = okRama ? "" : "Selecciona tu rama.";
 
-  if (!okNombres || !okEmail || !okContacto || !okRama) {
+  if (!okNombres || !okContacto || !okRama) {
     e.preventDefault();
     return;
   }
@@ -429,18 +316,18 @@ form.addEventListener('submit', async function(e) {
   btnEnviar.textContent = "Enviando...";
 
   try {
-    const formData = new FormData(form);
-    const response = await fetch(form.action, {
+    const respuesta = await fetch(form.action, {
       method: 'POST',
-      body: formData,
+      body: new FormData(form),
       headers: { 'Accept': 'application/json' }
     });
 
-    if (response.ok) {
-      form.style.display = 'none';
+    if (respuesta.ok) {
+      // Ocultar formulario y mostrar mensaje verde
+      formulario.classList.add('oculto');
       mensajeExito.classList.add('visible');
     } else {
-      alert('Hubo un problema al enviar. Inténtalo de nuevo.');
+      alert('Hubo un problema. Inténtalo de nuevo.');
       btnEnviar.disabled = false;
       btnEnviar.textContent = "Enviar mi confirmación";
     }
