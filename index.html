@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Fiesta de Rosas y Clavel — Registro JAS</title>
+<title>Fiesta de Rosas & Clavel — Registro JAS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -156,7 +156,7 @@
     color:var(--wine-deep);
     letter-spacing:0.01em;
   }
-  input[type="text"], input[type="tel"], select{
+  input[type="text"], input[type="tel"], input[type="email"], select{
     font-family:inherit;
     font-size:16px;
     padding:13px 14px;
@@ -254,8 +254,12 @@
     margin-top:28px;
   }
   .success{
+    display:none;
     text-align:center;
-    padding:20px 6px 6px;
+    padding:30px 20px;
+  }
+  .success.visible{
+    display:block;
   }
   .success svg{width:56px;height:56px;margin-bottom:14px;}
   .success h2{
@@ -265,7 +269,7 @@
     margin:0 0 10px;
   }
   .success p{color:var(--ink-soft);font-size:14.5px;margin:0;}
-  [hidden]{display:none !important;}
+  form.hidden{display:none;}
 </style>
 </head>
 <body>
@@ -306,18 +310,29 @@
       </ul>
     </div>
 
-    <!-- ✅ TU formulario con tu enlace de Formspree -->
+    <!-- ✅ Formulario con tu enlace -->
     <form id="registroForm" action="https://formspree.io/f/xzegzgjy" method="POST">
+      <input type="hidden" name="_subject" value="Nuevo registro - Rosas & Clavel">
+      <input type="hidden" name="_replyto">
+      
       <div class="field">
         <label for="nombres">Nombres y apellidos</label>
         <input type="text" id="nombres" name="nombres" autocomplete="name" required placeholder="Ingresa tus datos">
         <span class="hint" id="hint-nombres"></span>
       </div>
+      
+      <div class="field">
+        <label for="email">Tu correo electrónico</label>
+        <input type="email" id="email" name="_replyto" autocomplete="email" required placeholder="tu@correo.com">
+        <span class="hint" id="hint-email"></span>
+      </div>
+      
       <div class="field">
         <label for="contacto">Número de contacto</label>
         <input type="tel" id="contacto" name="contacto" autocomplete="tel" required placeholder="Ingresa tus datos">
         <span class="hint" id="hint-contacto"></span>
       </div>
+      
       <div class="field">
         <label for="rama">Rama</label>
         <select id="rama" name="rama" required>
@@ -330,6 +345,7 @@
         </select>
         <span class="hint" id="hint-rama"></span>
       </div>
+      
       <div class="field">
         <label>¿Eres miembro SUD?</label>
         <div class="radio-group">
@@ -343,6 +359,7 @@
           </label>
         </div>
       </div>
+      
       <div class="field">
         <label>¿Asistirás al evento?</label>
         <div class="radio-group">
@@ -356,56 +373,83 @@
           </label>
         </div>
       </div>
+      
       <label class="consent">
         <input type="checkbox" id="acepto" name="acepto" value="Sí" required>
         <span>He leído y me comprometo a cumplir las normas establecidas para la actividad.</span>
       </label>
-      <button type="submit">Enviar mi confirmación</button>
+      
+      <button type="submit" id="btnEnviar">Enviar mi confirmación</button>
     </form>
 
-    <div class="success" id="success" hidden>
+    <!-- ✅ Mensaje de confirmación que APARECE -->
+    <div class="success" id="mensajeExito">
       <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <circle cx="28" cy="28" r="27" stroke="var(--ok)" stroke-width="2"/>
         <path d="M17 29l7 7 15-15" stroke="var(--ok)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <h2>¡Gracias! Tu registro fue enviado</h2>
-      <p>Nos vemos en la Fiesta de Rosas y Clavel 💐</p>
+      <h2>¡Registro exitoso! ✅</h2>
+      <p>Gracias por confirmar tu asistencia 💐<br>Te llegará un mensaje de confirmación a tu correo.</p>
     </div>
+    
     <p class="footer-note">JAS Distrito Abancay</p>
   </div>
 </div>
+
 <script>
-(function(){
-  var form = document.getElementById('registroForm');
-  var success = document.getElementById('success');
+const form = document.getElementById('registroForm');
+const mensajeExito = document.getElementById('mensajeExito');
+const btnEnviar = document.getElementById('btnEnviar');
 
-  form.addEventListener('submit', function(e){
-    var nombres = form.nombres.value.trim();
-    var contacto = form.contacto.value.trim();
-    var rama = form.rama.value;
-    var okNombres = nombres.length > 3;
-    var okContacto = /^[0-9+()\s-]{6,15}$/.test(contacto);
-    var okRama = rama !== "";
+form.addEventListener('submit', async function(e) {
+  // Validación
+  const nombres = document.getElementById('nombres').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const contacto = document.getElementById('contacto').value.trim();
+  const rama = document.getElementById('rama').value;
+  
+  const okNombres = nombres.length > 3;
+  const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const okContacto = /^[0-9+()\s-]{6,15}$/.test(contacto);
+  const okRama = rama !== "";
 
-    document.getElementById('hint-nombres').textContent = okNombres ? "" : "Escribe tu nombre completo.";
-    document.getElementById('hint-contacto').textContent = okContacto ? "" : "Ingresa un número de contacto válido.";
-    document.getElementById('hint-rama').textContent = okRama ? "" : "Selecciona tu rama.";
+  document.getElementById('hint-nombres').textContent = okNombres ? "" : "Escribe tu nombre completo.";
+  document.getElementById('hint-email').textContent = okEmail ? "" : "Escribe un correo válido.";
+  document.getElementById('hint-contacto').textContent = okContacto ? "" : "Ingresa un número de contacto válido.";
+  document.getElementById('hint-rama').textContent = okRama ? "" : "Selecciona tu rama.";
 
-    if(!okNombres || !okContacto || !okRama){
-      e.preventDefault();
-      return;
+  if (!okNombres || !okEmail || !okContacto || !okRama) {
+    e.preventDefault();
+    return;
+  }
+
+  // Enviar y mostrar mensaje
+  e.preventDefault();
+  btnEnviar.disabled = true;
+  btnEnviar.textContent = "Enviando...";
+
+  try {
+    const formData = new FormData(form);
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      form.style.display = 'none';
+      mensajeExito.classList.add('visible');
+    } else {
+      alert('Hubo un problema al enviar. Inténtalo de nuevo.');
+      btnEnviar.disabled = false;
+      btnEnviar.textContent = "Enviar mi confirmación";
     }
-
-    var btn = form.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    btn.textContent = "Enviando...";
-
-    setTimeout(function(){
-      form.hidden = true;
-      success.hidden = false;
-    }, 800);
-  });
-})();
+  } catch (error) {
+    alert('Error de conexión. Inténtalo de nuevo.');
+    btnEnviar.disabled = false;
+    btnEnviar.textContent = "Enviar mi confirmación";
+  }
+});
 </script>
 </body>
 </html>
